@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MathLab Education — Expert Mathematics Tuition by Arman. O/L, A/L and beyond.">
+  <title>MathLab Education — Arman Teaches Math</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+
+  <!-- Admin notification bar -->
+  <div class="admin-bar" id="adminBar">
+    <div class="admin-bar-left">
+      <span class="admin-bar-icon">⚙</span>
+      <span>ADMIN MODE</span>
+    </div>
+    <div class="admin-bar-actions">
+      <button onclick="ML.admin.resetToDefaults()" class="ab-btn ab-danger">↺ Reset Defaults</button>
+      <button onclick="ML.admin.exportData()" class="ab-btn">⬇ Export JSON</button>
+      <button onclick="ML.admin.importData()" class="ab-btn">⬆ Import JSON</button>
+      <button onclick="ML.admin.logout()" class="ab-btn ab-exit">✕ Exit Admin</button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Toggle -->
+  <button class="mob-menu-btn" id="mobMenuBtn" onclick="ML.nav.toggleMobile()" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <div class="sb-logo-wrap">
+        <div class="sb-mark">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#7a621a"/>
+                <stop offset="100%" style="stop-color:#f0c040"/>
+              </linearGradient>
+            </defs>
+            <path d="M22 18 L78 18 L50 50 L78 82 L22 82" stroke="url(#lg)" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="sb-name-wrap">
+          <div class="sb-name">Math<span>Lab</span></div>
+          <div class="sb-meta">Education</div>
+        </div>
+      </div>
+    </div>
+    <nav class="sb-nav" id="sidebarNav">
+      <!-- Rendered by app.js -->
+    </nav>
+    <div class="sb-footer">
+      <div class="sb-cta">
+        <a href="#" id="sbWhatsApp" class="sb-cta-btn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enroll via WhatsApp
+        </a>
+      </div>
+      <div class="sb-footer-text" id="sbFooterText">© 2025 MathLab Education</div>
+    </div>
+  </aside>
+
+  <!-- Sidebar overlay for mobile -->
+  <div class="sb-overlay" id="sbOverlay" onclick="ML.nav.toggleMobile()"></div>
+
+  <!-- Main Content -->
+  <main class="main" id="mainContent">
+    <div id="sectionsContainer">
+      <!-- Rendered by app.js -->
+    </div>
+    <footer class="site-footer" id="siteFooter">
+      <!-- Rendered by app.js -->
+    </footer>
+  </main>
+
+  <!-- Admin Trigger (hidden, revealed by keyboard shortcut) -->
+  <button class="admin-trigger-btn" id="adminTriggerBtn" onclick="ML.admin.showLogin()" title="Admin Login">⚙</button>
+
+  <!-- Edit Modal -->
+  <div class="modal-overlay" id="editModalOverlay">
+    <div class="modal" id="editModal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="editModalTitle">Edit Content</h3>
+        <button class="modal-close-btn" onclick="ML.admin.closeEditModal()">✕</button>
+      </div>
+      <div class="modal-body" id="editModalBody"></div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="ML.admin.closeEditModal()">Cancel</button>
+        <button class="btn-primary" id="editModalSave">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Login Modal -->
+  <div class="modal-overlay" id="loginModalOverlay">
+    <div class="modal modal-sm" id="loginModal">
+      <div class="modal-header">
+        <div class="modal-header-logo">
+          <svg viewBox="0 0 100 100" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 18 L78 18 L50 50 L78 82 L22 82" stroke="#c9a227" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3>Admin Access</h3>
+        </div>
+        <button class="modal-close-btn" onclick="ML.admin.closeLogin()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">Enter your admin password to manage content on this site.</p>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="adminPassInput" class="form-input" placeholder="Enter password…" 
+                 onkeydown="if(event.key==='Enter')ML.admin.attemptLogin()">
+        </div>
+        <div class="login-error" id="loginError"></div>
+        <p class="login-hint">Shortcut: <kbd>Ctrl+Shift+A</kbd></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="ML.admin.closeLogin()">Cancel</button>
+        <button class="btn-primary" onclick="ML.admin.attemptLogin()">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Dialog -->
+  <div class="modal-overlay" id="confirmOverlay">
+    <div class="modal modal-sm" id="confirmModal">
+      <div class="modal-header">
+        <h3 id="confirmTitle">Confirm Action</h3>
+        <button class="modal-close-btn" onclick="ML.admin.closeConfirm()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p id="confirmMessage" style="color:var(--txt);"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="ML.admin.closeConfirm()">Cancel</button>
+        <button class="btn-danger" id="confirmOkBtn">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toastContainer"></div>
+
+  <!-- Import file input (hidden) -->
+  <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="ML.admin.handleImportFile(event)">
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/admin.js"></script>
+  <script src="assets/js/embed.js"></script>
+</body>
+</html>
